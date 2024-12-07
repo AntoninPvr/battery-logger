@@ -154,9 +154,10 @@ show_progress_bar() {
     local elapsed=$1
     local max_time=$2
     local remaining=$((max_time - elapsed))
-    local remaining_minutes=$((remaining / 60))
+    local remaining_hours=$((remaining / 3600))
+    local remaining_minutes=$(( (remaining % 3600) / 60 ))
     local remaining_seconds=$((remaining % 60))
-    local bar_length=25
+    local bar_length=33
     local filled_length=$(( (elapsed * bar_length) / max_time ))
     local empty_length=$(( bar_length - filled_length ))
 
@@ -164,7 +165,7 @@ show_progress_bar() {
     bar=$(printf "%${filled_length}s" | tr ' ' '#')
     empty=$(printf "%${empty_length}s")
 
-    interface_output+="\rProgress: |${bar}${empty}| Remaining Time: $(printf "%02d:%02d" "$remaining_minutes" "$remaining_seconds")"
+    interface_output+="\rProgress: |${bar}${empty}| ETA: $(printf "%02d:%02d:%02d" "$remaining_hours" "$remaining_minutes" "$remaining_seconds")"
 }
 
 # Track runtime
