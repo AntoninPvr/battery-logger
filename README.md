@@ -74,7 +74,7 @@ The terminal interface displays real-time battery data and log file size. It is 
 ====================== BATTERY LOGGER =====================
 Interval: 10 seconds
 Battery Path: /sys/class/power_supply/BAT0
-Start Time: Fri Dec  6 07:11:16 PM EST 2024
+Start Time: Fri Dec  6 07:31:27 PM EST 2024
 ===========================================================
 Log File: battery_log.csv
 Current Log File Size: 4.0K
@@ -82,15 +82,15 @@ Current Log File Size: 4.0K
 =================== Current Battery Data ==================
 | Metric         | Value (converted)  | Raw Value         |
 |----------------|--------------------|-------------------|
-| current_now    | 935.000 mA         | 935000            |
-| charge_now     | 4364.000 mAh       | 4364000           |
-| voltage_now    | 16.312 V           | 16312000          |
-| capacity       | 80 %                                   |
+| current_now    | 1089.000 mA        | 1089000           |
+| charge_now     | 4073.000 mAh       | 4073000           |
+| voltage_now    | 16.071 V           | 16071000          |
+| capacity       | 75 %                                   |
 ===========================================================
 temperature      : 27.8 °C
 charging status  : Discharging
 ===========================================================
-Progress: |#######                  | Remaining Time: 06:49
+Progress: |###########                      | ETA: 01:36:21
 ```
 
 ## Notes
