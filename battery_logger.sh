@@ -107,47 +107,44 @@ log_battery_status() {
     fi
 }
 
-# Function to display the terminal interface with cleaner formatting
 show_terminal_interface() {
     # Accumulate all interface information into a variable
-    interface_output="========================= BATTERY LOGGER =========================\n"
+    interface_output="====================== BATTERY LOGGER =====================\n"
     interface_output+="Interval: $INTERVAL seconds\n"
     interface_output+="Battery Path: $BATTERY_PATH\n"
     interface_output+="Start Time: $(date -d @$START_TIME)\n"
 
     # Only include log file size if REPORT_ENABLED is 1 and LOG_FILE exists
     if [ "$REPORT_ENABLED" -eq 1 ] && [ -f "$LOG_FILE" ]; then
-        interface_output+="==================================================================\n"
+        interface_output+="===========================================================\n"
         interface_output+="Log File: $LOG_FILE\n"
         interface_output+="Current Log File Size: $(du -h "$LOG_FILE" | cut -f1)\n"
     fi
 
     interface_output+="\n"
-    interface_output+="======================== Current Battery Data =====================\n"
+    interface_output+="=================== Current Battery Data ==================\n"
 
     # Define column widths for the table
-    metric_width=22
-    value_width=22
-    raw_value_width=22
+    metric_width=14
+    value_width=18
+    raw_value_width=18
 
     # Header row
-    interface_output+="| $(printf "%-${metric_width}s" "Metric") | $(printf "%-${value_width}s" "Value (converted)") | $(printf "%-${raw_value_width}s" "Raw Value") |\n"
-    interface_output+="|----------------------|-----------------------|----------------------|\n"
+    interface_output+="| $(printf "%-${metric_width}s" "Metric") | $(printf "%-${value_width}s" "Value (converted)") | $(printf "%-${raw_value_width}s" "Raw Value")|\n"
+    interface_output+="|----------------|--------------------|-------------------|\n"
 
     # Add rows for current, charge, and voltage with proper padding
-    interface_output+="| $(printf "%-${metric_width}s" "current_now (mA)")  | $(printf "%-${value_width}s" "$(echo "scale=3; $CURRENT / 1000" | bc)") | $(printf "%-${raw_value_width}s" "$CURRENT µA") |\n"
-    interface_output+="| $(printf "%-${metric_width}s" "charge_now (mAh)") | $(printf "%-${value_width}s" "$(echo "scale=3; $CHARGE / 1000" | bc)") | $(printf "%-${raw_value_width}s" "$CHARGE µAh") |\n"
-    interface_output+="| $(printf "%-${metric_width}s" "voltage_now (V)") | $(printf "%-${value_width}s" "$(echo "scale=3; $VOLTAGE / 1000000" | bc)") | $(printf "%-${raw_value_width}s" "$VOLTAGE µV") |\n"
-    interface_output+="| $(printf "%-${metric_width}s" "capacity")        | $(printf "%-${value_width}s" "$CAPACITY %")          | $(printf "%-${raw_value_width}s" "$CAPACITY %") |\n"
+    interface_output+="| $(printf "%-${metric_width}s" "current_now") | $(printf "%-${value_width}s" "$(echo "scale=3; $CURRENT / 1000" | bc) mA") | $(printf "%-${raw_value_width}s" "$CURRENT")|\n"
+    interface_output+="| $(printf "%-${metric_width}s" "charge_now") | $(printf "%-${value_width}s" "$(echo "scale=3; $CHARGE / 1000" | bc) mAh") | $(printf "%-${raw_value_width}s" "$CHARGE")|\n"
+    interface_output+="| $(printf "%-${metric_width}s" "voltage_now") | $(printf "%-${value_width}s" "$(echo "scale=3; $VOLTAGE / 1000000" | bc) V") | $(printf "%-${raw_value_width}s" "$VOLTAGE")|\n"
+    interface_output+="| $(printf "%-${metric_width}s" "capacity") | $(printf "%-${value_width}s" "$CAPACITY %")                     |\n"
 
-    interface_output+="==================================================================\n"
+    interface_output+="===========================================================\n"
     interface_output+="temperature      : $TEMPERATURE °C\n"
     interface_output+="charging status  : $STATUS\n"
-    interface_output+="==================================================================\n"
-
-    # Display the output
-    echo -e "$interface_output"
+    interface_output+="===========================================================\n"
 }
+
 
 
 
@@ -159,7 +156,7 @@ show_progress_bar() {
     local remaining=$((max_time - elapsed))
     local remaining_minutes=$((remaining / 60))
     local remaining_seconds=$((remaining % 60))
-    local bar_length=32
+    local bar_length=25
     local filled_length=$(( (elapsed * bar_length) / max_time ))
     local empty_length=$(( bar_length - filled_length ))
 

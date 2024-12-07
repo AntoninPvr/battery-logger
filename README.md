@@ -71,23 +71,26 @@ To exit the script, press `Ctrl+C`.
 The terminal interface displays real-time battery data and log file size. It is enabled by default and can be disabled using the `--no-interface` option.
 
 ```
-========================= BATTERY LOGGER =========================
-Interval: 1 seconds
+====================== BATTERY LOGGER =====================
+Interval: 10 seconds
 Battery Path: /sys/class/power_supply/BAT0
-Start Time: Thu Dec  5 06:14:03 PM EST 2024
-==================================================================
+Start Time: Fri Dec  6 07:11:16 PM EST 2024
+===========================================================
 Log File: battery_log.csv
 Current Log File Size: 4.0K
 
-======================== Current Battery Data =====================
-current_now      : 2139000 µA
-charge_now       : 1924000 µAh
-capacity         : 35 %
-voltage_now      : 14651000 µV
+=================== Current Battery Data ==================
+| Metric         | Value (converted)  | Raw Value         |
+|----------------|--------------------|-------------------|
+| current_now    | 935.000 mA         | 935000            |
+| charge_now     | 4364.000 mAh       | 4364000           |
+| voltage_now    | 16.312 V           | 16312000          |
+| capacity       | 80 %                                   |
+===========================================================
 temperature      : 27.8 °C
 charging status  : Discharging
-==================================================================
-Progress: |####################            | Remaining Time: 00:05
+===========================================================
+Progress: |#######                  | Remaining Time: 06:49
 ```
 
 ## Notes
