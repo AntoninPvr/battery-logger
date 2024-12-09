@@ -101,7 +101,14 @@ Progress: |###########                      | ETA: 01:36:21
 - **capacity** : Battery capacity in percentage.
 - **voltage_now** : Voltage in microvolts.
 - **temperature** : Battery temperature in Celsius.
-- **charging status** : Charging status (Charging, Discharging, Full, Unknown).
+- **charging status** :
+
+  | Status | Value |
+  |---|---|
+  | Charging | 1 |
+  | Discharging | -1 |
+  | Full | 0 |
+  | Unknown | 0 |
 
 ## Known Issues
 

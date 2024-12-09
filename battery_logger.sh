@@ -87,6 +87,7 @@ log_battery_status() {
     VOLTAGE=$(cat "$BATTERY_PATH/voltage_now" 2>/dev/null || echo "N/A")
     CAPACITY=$(cat "$BATTERY_PATH/capacity" 2>/dev/null || echo "N/A")
     CHARGE=$(cat "$BATTERY_PATH/charge_now" 2>/dev/null || echo "N/A")
+    STATUS=$(cat "$BATTERY_PATH/status" 2>/dev/null || echo "Unknown")
 
     # Fetch temperature using acpi -t
     if command -v acpi &>/dev/null; then
@@ -96,12 +97,14 @@ log_battery_status() {
     fi
 
     # Determine charging status
-    STATUS=$(cat "$BATTERY_PATH/status" 2>/dev/null || echo "Unknown")
     CHARGING=0
     if [ "$STATUS" == "Charging" ]; then
         CHARGING=1
+    elif [ "$STATUS" == "Discharging" ]; then
+        CHARGING=-1
     fi
 
+    # Append data to log file if reporting is enabled
     if (( REPORT_ENABLED )); then
         echo "$TIMESTAMP,$CURRENT,$VOLTAGE,$CAPACITY,$CHARGE,$TEMPERATURE,$CHARGING" >> "$LOG_FILE"
     fi
